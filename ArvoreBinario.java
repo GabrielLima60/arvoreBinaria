@@ -2,17 +2,10 @@ package arvore;
 
 import static java.lang.Math.random;
 import java.io.PrintStream;
-import java.security.KeyPair;
-import java.security.PublicKey;
-import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.ConcurrentModificationException;
-import java.util.IllegalFormatCodePointException;
-import java.util.List;
-import java.util.NoSuchElementException;
 
 public class ArvoreBinario {
 	private NoBinario root;
+	public NoBinario trunk;
 
 	public ArvoreBinario() {
 		super();
@@ -29,7 +22,7 @@ public class ArvoreBinario {
 	} 
 
 	
-  //imprimir a lista
+  //imprimir a arvore binaria
   public void traversePreOrder(StringBuilder sb, String padding, String pointer, NoBinario No) {
     if (No != null) {
     	sb.append(padding);
@@ -55,7 +48,7 @@ public class ArvoreBinario {
     os.print(sb.toString());
   }
   
-  //adicionar No binario em locar aleatório
+  //adicionar No Binario em local aleatório
   
 	public void adicionar0(String Add) {
   		adicionar0(Add, this.root);
@@ -80,6 +73,8 @@ public class ArvoreBinario {
     }
   }  
   	
+	//adicionar No Binario duplicado
+	
   	public void adicionar1(String Add) {
   		adicionar1(Add, this.root);
   	}
@@ -101,15 +96,15 @@ public class ArvoreBinario {
   	    
   	}
   	
-  	private int profundidade(NoBinario noPai) {
-  		if (noPai.getEsquerda() == null || noPai.getDireita() == null) {
-  			return 1;
-  		}
-  		else {	
-
-  			return 1 + profundidade(noPai.getDireita());
+  	//adicionar No Binario corretamente, mas sem suporte a arvores já desbalanceadas
+  	
+  	private int quantidadeFilhos(NoBinario noPai) {
+  		if (noPai.getEsquerda() == null || noPai.getDireita() == null) 
+  			return 0;
+  		
+  		else 	
+  			return 1 + quantidadeFilhos(noPai.getDireita()) + quantidadeFilhos(noPai.getEsquerda());
   			
-  		}
   	}
 
   	public void adicionar2(String Add) {
@@ -124,13 +119,15 @@ public class ArvoreBinario {
   		else if (noPai.getDireita() == null)
   			addNo(Add, "direita", noPai);		
   		
-  		else if (profundidade(noPai.getEsquerda()) <= profundidade(noPai.getDireita())) 
+  		else if (quantidadeFilhos(noPai.getEsquerda()) <= quantidadeFilhos(noPai.getDireita())) 
   			adicionar2(Add,noPai.getEsquerda());	
   		
   		else 
   			adicionar2(Add, noPai.getDireita());
   	}
-
+ 	
+  	
+  	//funções de adicionar feitas pelo professor
   	
 	public void addNo(String Add, String posicao, NoBinario noPai) {
 		NoBinario noToAdd = new NoBinario(Add);
@@ -177,10 +174,9 @@ public class ArvoreBinario {
 	  	      else {
 	  	        removeNo(remove, noPai.getDireita());
 	  	      } 
-		}
+		} 	 		
 	}
 }
-
 
 
 
