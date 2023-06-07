@@ -4,16 +4,16 @@ public class HelloArvore {
 
 	public static void main(String[] args) {
 		
-	ArvoreBinario arvoreBinario = new ArvoreBinario();
-
-	for (int i = 1; i <=30; i++) {
-		arvoreBinario.adicionar2(String.valueOf(i));
+		ArvoreBinario arvoreBinario = new ArvoreBinario();
+		
+		arvoreBinario.adicionar2(String.valueOf(1));
+		arvoreBinario.adicionar2(String.valueOf(2));
+		arvoreBinario.adicionar2(String.valueOf(3));
+		arvoreBinario.removeNo("2");
+		
+		for (int i = 4; i <=12; i++) {
+			arvoreBinario.adicionar2(String.valueOf(i));
+		}
+	    arvoreBinario.imprimir(System.out);
 	}
-	
-	//arvoreBinario.removeNo("10");
-
-    arvoreBinario.imprimir(System.out);
-
-	}
-
 }
